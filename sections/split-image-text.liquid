@@ -1,6 +1,94 @@
+{% liquid
+  assign image = section.settings.image
+%}
+<section id="section-{{ section.id }}" class="section-split-image-text{% if section.settings.reverses_on_mobile %} mobile-reverse{% endif %}">
+  <div class="split-image">
+    {%- if image != blank -%}
+      <img src="{{ image | img_url: '900x' }}" alt="{{ image.alt | escape }}" loading="lazy">
+    {%- else -%}
+      <div class="placeholder-image" style="background:#f7f7f7; height:350px; width:100%;"></div>
+    {%- endif -%}
+  </div>
+
+  <div class="split-text">
+    {%- if section.settings.heading != blank -%}
+      <h2>{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {{ section.settings.body }}
+
+    {%- if section.settings.featured_heading != blank -%}
+      <h3>{{ section.settings.featured_heading }}</h3>
+    {%- endif -%}
+
+    <ul class="brand-list">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          <li {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.brand_url }}" target="_blank">{{ block.settings.brand_name }}</a>
+          </li>
+        {% endfor %}
+      {% else %}
+        {% assign brand_lines = section.settings.brands | split: "\n" %}
+        {% for line in brand_lines %}
+          {% if line != blank %}
+            <li>{{ line }}</li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+</section>
+
+<style>
+.section-split-image-text {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 4rem 2rem;
+}
+.section-split-image-text.mobile-reverse {
+  flex-direction: column-reverse;
+}
+.section-split-image-text .split-image { flex: 1; }
+.section-split-image-text .split-image img { width: 100%; height: auto; display: block; border-radius: 8px; }
+.section-split-image-text .split-text { flex: 1; max-width: 480px; }
+.section-split-image-text .brand-list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
+.section-split-image-text .brand-list li + li { margin-top: 0.5rem; }
+.section-split-image-text .brand-list a { text-decoration: none; border-bottom: 1px solid currentColor; }
+@media (max-width: 768px) {
+  .section-split-image-text { flex-direction: column; }
+  .section-split-image-text .split-text { max-width: 100%; }
+}
+</style>
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Imagen + Texto (dividido)",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen" },
+    { "type": "text", "id": "heading", "label": "Título principal", "default": "Welcome to HORNE" },
+    { "type": "richtext", "id": "body", "label": "Texto descriptivo", "default": "<p>Welcome to your destination for authentic modern design...</p>" },
+    { "type": "text", "id": "featured_heading", "label": "Encabezado de marcas destacadas", "default": "Featured Brands" },
+    { "type": "textarea", "id": "brands", "label": "Lista de marcas (una por línea si no usas bloques)", "default": "Ferm Living Copenhagen\nAudo Copenhagen\nSkagerak by Fritz Hansen\nGubi" },
+    { "type": "checkbox", "id": "reverses_on_mobile", "label": "Invertir orden en móvil (imagen abajo, texto arriba)", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Enlace de marca",
+      "settings": [
+        { "type": "text", "id": "brand_name", "label": "Nombre de la marca" },
+        { "type": "url", "id": "brand_url", "label": "URL de la marca" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Imagen izquierda / Texto derecha", "category": "Contenido" }
+  ]
+}
 {% endschema %}
+
