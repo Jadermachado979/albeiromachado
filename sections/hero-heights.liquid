@@ -1,6 +1,64 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Hero Heights",
+  "tag": "section",
+  "class": "hero-heights",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título principal",
+      "default": "Braincare that works"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Your daily supplement for better focus, mood and energy."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "Start your plan"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Link del botón"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Imagen destacada"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Heights",
+      "category": "Clon Heights"
+    }
+  ]
+}
 {% endschema %}
+
+<section class="bg-white py-20 px-4 text-center">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      {{ section.settings.heading }}
+    </h1>
+    <p class="text-lg md:text-xl text-gray-700 mb-6">
+      {{ section.settings.subheading }}
+    </p>
+    {% if section.settings.button_text and section.settings.button_url %}
+      <a href="{{ section.settings.button_url }}" class="inline-block bg-black text-white py-3 px-6 rounded-md hover:bg-gray-800 transition">
+        {{ section.settings.button_text }}
+      </a>
+    {% endif %}
+    {% if section.settings.hero_image != blank %}
+      <div class="mt-10">
+        <img src="{{ section.settings.hero_image | image_url: 'master' }}" class="mx-auto max-w-full h-auto" alt="Hero Image">
+      </div>
+    {% endif %}
+  </div>
+</section>
