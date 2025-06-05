@@ -1,6 +1,113 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Header Gymshark",
+  "tag": "header",
+  "class": "header-gymshark",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "url",
+      "id": "link_women",
+      "label": "Enlace WOMEN"
+    },
+    {
+      "type": "url",
+      "id": "link_men",
+      "label": "Enlace MEN"
+    },
+    {
+      "type": "url",
+      "id": "link_accessories",
+      "label": "Enlace ACCESSORIES"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Gymshark",
+      "category": "Header"
+    }
+  ]
+}
 {% endschema %}
+
+<style>
+.header-gymshark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: white;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: sans-serif;
+}
+
+.header-gymshark nav {
+  display: flex;
+  gap: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.header-gymshark a {
+  color: #111;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.header-gymshark .icons {
+  display: flex;
+  gap: 16px;
+}
+
+.header-gymshark .icons svg {
+  width: 20px;
+  height: 20px;
+  stroke: #111;
+}
+</style>
+
+<header class="header-gymshark">
+  <!-- Logo -->
+  <div class="logo">
+    {% if section.settings.logo %}
+      <a href="/">
+        <img src="{{ section.settings.logo | image_url: 'medium' }}" alt="Logo" style="height: 40px;">
+      </a>
+    {% else %}
+      <a href="/" style="font-weight: bold;">GYMSHARK</a>
+    {% endif %}
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    {% if section.settings.link_women %}
+      <a href="{{ section.settings.link_women }}">WOMEN</a>
+    {% endif %}
+    {% if section.settings.link_men %}
+      <a href="{{ section.settings.link_men }}">MEN</a>
+    {% endif %}
+    {% if section.settings.link_accessories %}
+      <a href="{{ section.settings.link_accessories }}">ACCESSORIES</a>
+    {% endif %}
+  </nav>
+
+  <!-- Icons -->
+  <div class="icons">
+    <a href="/search" aria-label="Search">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </a>
+    <a href="/pages/wishlist" aria-label="Wishlist">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 21c-4.84-4.05-8-7.42-8-11.2A5.2 5.2 0 0 1 9.2 4.6c1.42 0 2.73.65 3.8 1.7 1.07-1.05 2.38-1.7 3.8-1.7A5.2 5.2 0 0 1 20 9.8c0 3.78-3.16 7.15-8 11.2z"/></svg>
+    </a>
+    <a href="/account" aria-label="Account">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    </a>
+    <a href="/cart" aria-label="Cart">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M6 6h15l-1.5 9h-13z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+    </a>
+  </div>
+</header>
