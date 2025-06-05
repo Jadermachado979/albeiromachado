@@ -1,33 +1,54 @@
 {% schema %}
 {
-  "name": "Header Gymshark",
+  "name": "Header Personalizado",
   "tag": "header",
-  "class": "header-gymshark",
+  "class": "header-personalizado",
   "settings": [
     {
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
     },
+
     {
-      "type": "url",
-      "id": "link_women",
-      "label": "Enlace WOMEN"
+      "type": "text",
+      "id": "nav_1_label",
+      "label": "Texto botón 1",
+      "default": "SHOP"
     },
     {
       "type": "url",
-      "id": "link_men",
-      "label": "Enlace MEN"
+      "id": "nav_1_url",
+      "label": "Enlace botón 1"
+    },
+
+    {
+      "type": "text",
+      "id": "nav_2_label",
+      "label": "Texto botón 2",
+      "default": "LOOKBOOK"
     },
     {
       "type": "url",
-      "id": "link_accessories",
-      "label": "Enlace ACCESSORIES"
+      "id": "nav_2_url",
+      "label": "Enlace botón 2"
+    },
+
+    {
+      "type": "text",
+      "id": "nav_3_label",
+      "label": "Texto botón 3",
+      "default": "ABOUT"
+    },
+    {
+      "type": "url",
+      "id": "nav_3_url",
+      "label": "Enlace botón 3"
     }
   ],
   "presets": [
     {
-      "name": "Header Gymshark",
+      "name": "Header Personalizado",
       "category": "Header"
     }
   ]
@@ -35,68 +56,67 @@
 {% endschema %}
 
 <style>
-.header-gymshark {
+.header-personalizado {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
+  padding: 16px 32px;
   background-color: white;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #eee;
   font-family: sans-serif;
 }
 
-.header-gymshark nav {
+.header-personalizado .left,
+.header-personalizado .center,
+.header-personalizado .right {
   display: flex;
+  align-items: center;
   gap: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
 }
 
-.header-gymshark a {
-  color: #111;
-  text-decoration: none;
+.header-personalizado .center {
+  justify-content: center;
+  flex: 1;
+  text-transform: uppercase;
+  font-weight: bold;
   font-size: 14px;
 }
 
-.header-gymshark .icons {
-  display: flex;
-  gap: 16px;
-}
-
-.header-gymshark .icons svg {
+.header-personalizado .right svg {
   width: 20px;
   height: 20px;
   stroke: #111;
+  cursor: pointer;
 }
 </style>
 
-<header class="header-gymshark">
-  <!-- Logo -->
-  <div class="logo">
+<header class="header-personalizado">
+  <!-- Logo izquierdo -->
+  <div class="left">
     {% if section.settings.logo %}
       <a href="/">
         <img src="{{ section.settings.logo | image_url: 'medium' }}" alt="Logo" style="height: 40px;">
       </a>
     {% else %}
-      <a href="/" style="font-weight: bold;">GYMSHARK</a>
+      <a href="/" style="font-weight: bold;">LOGO</a>
     {% endif %}
   </div>
 
-  <!-- Navigation -->
-  <nav>
-    {% if section.settings.link_women %}
-      <a href="{{ section.settings.link_women }}">WOMEN</a>
+  <!-- Menú central editable -->
+  <div class="center">
+    {% if section.settings.nav_1_url %}
+      <a href="{{ section.settings.nav_1_url }}">{{ section.settings.nav_1_label }}</a>
     {% endif %}
-    {% if section.settings.link_men %}
-      <a href="{{ section.settings.link_men }}">MEN</a>
+    {% if section.settings.nav_2_url %}
+      <a href="{{ section.settings.nav_2_url }}">{{ section.settings.nav_2_label }}</a>
     {% endif %}
-    {% if section.settings.link_accessories %}
-      <a href="{{ section.settings.link_accessories }}">ACCESSORIES</a>
+    {% if section.settings.nav_3_url %}
+      <a href="{{ section.settings.nav_3_url }}">{{ section.settings.nav_3_label }}</a>
     {% endif %}
-  </nav>
+  </div>
 
-  <!-- Icons -->
-  <div class="icons">
+  <!-- Íconos a la derecha -->
+  <div class="right">
     <a href="/search" aria-label="Search">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
     </a>
@@ -111,3 +131,4 @@
     </a>
   </div>
 </header>
+
