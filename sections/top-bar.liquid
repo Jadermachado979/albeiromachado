@@ -1,0 +1,76 @@
+{% schema %}
+{
+  "name": "Topbar Gymshark",
+  "tag": "section",
+  "class": "topbar-gymshark",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Topbar Gymshark",
+      "category": "Header"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.topbar-gymshark {
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+  padding: 8px 20px;
+}
+
+.topbar-gymshark .container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.topbar-gymshark a {
+  color: #444;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.topbar-gymshark a:hover {
+  color: #111;
+}
+
+.topbar-gymshark select {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+}
+</style>
+
+<div class="topbar-gymshark">
+  <div class="container">
+    <a href="/account">Account</a>
+    <a href="/accessibility">Accessibility Statement</a>
+    <a href="/help">Help</a>
+    <a href="/email-signup">Email Sign Up</a>
+    <a href="/blog">Blog</a>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span>🇺🇸</span>
+      <select>
+        <option>US</option>
+        <option>UK</option>
+        <option>EU</option>
+      </select>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <select>
+        <option>English</option>
+        <option>Español</option>
+        <option>Français</option>
+      </select>
+    </div>
+  </div>
+</div>
