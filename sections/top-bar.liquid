@@ -3,7 +3,33 @@
   "name": "Topbar Gymshark",
   "tag": "section",
   "class": "topbar-gymshark",
-  "settings": [],
+  "settings": [
+    {
+      "type": "url",
+      "id": "link_account",
+      "label": "Enlace de Account"
+    },
+    {
+      "type": "url",
+      "id": "link_accessibility",
+      "label": "Enlace de Accessibility Statement"
+    },
+    {
+      "type": "url",
+      "id": "link_help",
+      "label": "Enlace de Help"
+    },
+    {
+      "type": "url",
+      "id": "link_email",
+      "label": "Enlace de Email Sign Up"
+    },
+    {
+      "type": "url",
+      "id": "link_blog",
+      "label": "Enlace de Blog"
+    }
+  ],
   "presets": [
     {
       "name": "Topbar Gymshark",
@@ -50,11 +76,21 @@
 
 <div class="topbar-gymshark">
   <div class="container">
-    <a href="/account">Account</a>
-    <a href="/accessibility">Accessibility Statement</a>
-    <a href="/help">Help</a>
-    <a href="/email-signup">Email Sign Up</a>
-    <a href="/blog">Blog</a>
+    {% if section.settings.link_account != blank %}
+      <a href="{{ section.settings.link_account }}">Account</a>
+    {% endif %}
+    {% if section.settings.link_accessibility != blank %}
+      <a href="{{ section.settings.link_accessibility }}">Accessibility Statement</a>
+    {% endif %}
+    {% if section.settings.link_help != blank %}
+      <a href="{{ section.settings.link_help }}">Help</a>
+    {% endif %}
+    {% if section.settings.link_email != blank %}
+      <a href="{{ section.settings.link_email }}">Email Sign Up</a>
+    {% endif %}
+    {% if section.settings.link_blog != blank %}
+      <a href="{{ section.settings.link_blog }}">Blog</a>
+    {% endif %}
 
     <div style="display: flex; align-items: center; gap: 8px;">
       <span>🇺🇸</span>
@@ -74,3 +110,4 @@
     </div>
   </div>
 </div>
+
