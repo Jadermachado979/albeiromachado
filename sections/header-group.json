@@ -11,28 +11,15 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement-bar-0"
-      ],
+    "top_bar_fUr8Ec": {
+      "type": "top-bar",
+      "name": "Topbar Gymshark",
       "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "",
-        "show_line_separator": true,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
+        "link_account": "shopify://collections/frontpage",
+        "link_accessibility": "shopify://collections",
+        "link_help": "",
+        "link_email": "shopify://policies/privacy-policy",
+        "link_blog": "shopify://policies/privacy-policy"
       }
     },
     "header": {
@@ -67,7 +54,7 @@
     }
   },
   "order": [
-    "announcement-bar",
+    "top_bar_fUr8Ec",
     "header",
     "hero_heights_74f9JG"
   ]
